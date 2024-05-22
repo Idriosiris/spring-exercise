@@ -5,7 +5,8 @@
 3. Set jackson mapper camelcase to underscore on our resource
 4. Set mapper of incoming json to DTO
 5. Use transformers between different layers
-6. Adding swagge ApiResponse
+6. Adding swagger ApiResponse
+
 # Done
 1. Initialize app with spring initializer
 2. Create .gitignore file
