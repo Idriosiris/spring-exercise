@@ -31,7 +31,7 @@ public class TrueProxyAPICompany {
     private String companyType;
 
     @JsonProperty("address")
-    private TrueProxyAPIAddress address;
+    private TruProxyAPIAddress address;
 
     /*
      * TODO: This might be an enum?
@@ -117,11 +117,11 @@ public class TrueProxyAPICompany {
         this.companyType = companyType;
     }
 
-    public TrueProxyAPIAddress getAddress() {
+    public TruProxyAPIAddress getAddress() {
         return address;
     }
 
-    public void setAddress(TrueProxyAPIAddress address) {
+    public void setAddress(TruProxyAPIAddress address) {
         this.address = address;
     }
 

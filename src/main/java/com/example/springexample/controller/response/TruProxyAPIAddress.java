@@ -2,7 +2,9 @@ package com.example.springexample.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TrueProxyAPIAddress {
+import java.util.Objects;
+
+public class TruProxyAPIAddress {
     @JsonProperty("premises")
     private String premises;
 
@@ -56,5 +58,18 @@ public class TrueProxyAPIAddress {
 
     public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TruProxyAPIAddress that = (TruProxyAPIAddress) o;
+        return Objects.equals(premises, that.premises) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country) && Objects.equals(locality, that.locality) && Objects.equals(addressLine1, that.addressLine1);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(premises, postalCode, country, locality, addressLine1);
     }
 }

@@ -3,10 +3,14 @@ package com.example.springexample.controller;
 import com.example.springexample.api.TruProxyAPI;
 import com.example.springexample.controller.request.CompanySearchRequestBody;
 import com.example.springexample.controller.response.TruProxyAPICompanyResponse;
+import com.example.springexample.controller.response.TruProxyAPIOfficersResponse;
 import com.example.springexample.domain.CompanySearchResponse;
+import com.example.springexample.domain.TruProxyAPICompanyOfficersPair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 import static com.example.springexample.controller.response.TruProxyAPICompanyResponse.toCompanySearchResponse;
 
@@ -27,8 +31,18 @@ public class SearchController {
            @RequestBody CompanySearchRequestBody companySearchRequestBody
     ) {
         TruProxyAPICompanyResponse truProxyAPICompanyResponse = truProxyAPI.searchForTruProxyAPICompany(apiKey, getSearchQuery(companySearchRequestBody, companySearchRequestBody));
+        TruProxyAPICompanyOfficersPair[] truProxyAPICompanyOfficersPair = Arrays.stream(truProxyAPICompanyResponse.getItems()).map(
+                trueProxyAPICompany -> {
+                    TruProxyAPIOfficersResponse truProxyAPIOfficers = truProxyAPI.getTruProxyAPIOfficers(apiKey, trueProxyAPICompany.getCompanyNumber());
 
-        return toCompanySearchResponse(truProxyAPICompanyResponse);
+                    return new TruProxyAPICompanyOfficersPair(
+                            trueProxyAPICompany,
+                            truProxyAPIOfficers.getItems()
+                    );
+                }
+        ).toArray(TruProxyAPICompanyOfficersPair[]::new);
+
+        return toCompanySearchResponse(truProxyAPICompanyOfficersPair, truProxyAPICompanyResponse.getTotalResults());
     }
 
     private static String getSearchQuery(CompanySearchRequestBody companySearchRequestBody, CompanySearchRequestBody searchRequestBody) {

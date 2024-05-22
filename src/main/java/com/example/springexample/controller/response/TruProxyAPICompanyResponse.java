@@ -1,9 +1,6 @@
 package com.example.springexample.controller.response;
 
-import com.example.springexample.domain.Address;
-import com.example.springexample.domain.Company;
-import com.example.springexample.domain.CompanySearchResponse;
-import com.example.springexample.domain.Officer;
+import com.example.springexample.domain.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
@@ -53,37 +50,46 @@ public class TruProxyAPICompanyResponse {
         this.items = items;
     }
 
-    public static CompanySearchResponse toCompanySearchResponse(TruProxyAPICompanyResponse truProxyAPICompanyResponse) {
-        Company[] companies = Arrays.stream(truProxyAPICompanyResponse.getItems()).map(
-                trueProxyAPICompany -> new Company(
-                        trueProxyAPICompany.getCompanyNumber(),
-                        trueProxyAPICompany.getCompanyType(),
-                        trueProxyAPICompany.getTitle(),
-                        trueProxyAPICompany.getCompanyStatus(),
-                        trueProxyAPICompany.getDateOfCreation(),
-                        new Address(
-                                trueProxyAPICompany.getAddress().getLocality(),
-                                trueProxyAPICompany.getAddress().getPostalCode(),
-                                trueProxyAPICompany.getAddress().getPremises(),
-                                trueProxyAPICompany.getAddress().getAddressLine1(),
-                                trueProxyAPICompany.getAddress().getCountry()
-                        ),
-                        new Officer[]{
-                                new Officer(
-                                        "BOXALL, Sarah Victoria",
-                                        "secretary",
-                                        "2008-02-11",
-                                        new Address(
-                                                "5",
-                                                "London",
-                                                "Cranford Close",
-                                                "England",
-                                                "SW20 0DP"
-                                        )
-                                )
-                        }
-                )).toArray(Company[]::new);
+    /*
+     * TODO this transformer needs to be inside TruProxyAPICompanyOfficersPair or somewhere else
+     * */
+    public static CompanySearchResponse toCompanySearchResponse(TruProxyAPICompanyOfficersPair[] truProxyAPICompanyOfficersPairs, int totalResults) {
+        Company[] companies = Arrays.stream(truProxyAPICompanyOfficersPairs).map(
+                truProxyAPICompanyOfficersPair -> {
+                    TrueProxyAPICompany company = truProxyAPICompanyOfficersPair.getCompany();
+                    TruProxyAPIOfficer[] officers = truProxyAPICompanyOfficersPair.getOfficers();
 
-        return new CompanySearchResponse(companies, truProxyAPICompanyResponse.getTotalResults());
+                    return new Company(
+                            company.getCompanyNumber(),
+                            company.getCompanyType(),
+                            company.getTitle(),
+                            company.getCompanyStatus(),
+                            company.getDateOfCreation(),
+                            new Address(
+                                    company.getAddress().getLocality(),
+                                    company.getAddress().getPostalCode(),
+                                    company.getAddress().getPremises(),
+                                    company.getAddress().getAddressLine1(),
+                                    company.getAddress().getCountry()
+                            ),
+                            Arrays.stream(officers).map(
+                                    trueProxyAPIOfficer -> new Officer(
+                                            trueProxyAPIOfficer.getName(),
+                                            trueProxyAPIOfficer.getOfficerRole(),
+                                            trueProxyAPIOfficer.getAppointedOn(),
+                                            new Address(
+                                                    trueProxyAPIOfficer.getAddress().getPremises(),
+                                                    trueProxyAPIOfficer.getAddress().getLocality(),
+                                                    trueProxyAPIOfficer.getAddress().getAddressLine1(),
+                                                    trueProxyAPIOfficer.getAddress().getCountry(),
+                                                    trueProxyAPIOfficer.getAddress().getPostalCode()
+                                            )
+                                    )
+                            ).toArray(Officer[]::new)
+                    );
+                }
+        ).toArray(Company[]::new);
+
+        return new CompanySearchResponse(companies, totalResults);
     }
 }

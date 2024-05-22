@@ -1,6 +1,7 @@
 package com.example.springexample.api;
 
 import com.example.springexample.controller.response.TruProxyAPICompanyResponse;
+import com.example.springexample.controller.response.TruProxyAPIOfficersResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -35,5 +36,21 @@ public class TruProxyAPI {
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
                 TruProxyAPICompanyResponse.class).getBody();
+    }
+
+    public TruProxyAPIOfficersResponse getTruProxyAPIOfficers(String apiKey, String companyNumber) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-api-key", apiKey);
+
+        URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Officers")
+                .queryParam("CompanyNumber", companyNumber)
+                .buildAndExpand(companyNumber)
+                .toUri();
+
+        return restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                TruProxyAPIOfficersResponse.class).getBody();
     }
 }
