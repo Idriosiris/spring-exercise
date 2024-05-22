@@ -1,6 +1,6 @@
 # TODO
-1. Refactor existing code as we can add some extra abstractions
-2. Add test for pulling in the response the Officer information
+1. Add logic that dictates how the company name and number are used 
+2. Add test for pulling in the response the Officer information 
 3. Add test for edge cases such as empty response list from the 3rd party api and/or 404, 400, 500 etc 
 4. Make sure the timeout to downstream services is sensible 
 5. Set jackson mapper camelcase to underscore on our resource 
