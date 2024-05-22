@@ -1,17 +1,21 @@
 package com.example.springexample.controller;
 
+import com.example.springexample.controller.request.CompanySearchRequestBody;
 import com.example.springexample.controller.response.TrueProxyAPICompanyResponse;
 import com.example.springexample.domain.Address;
 import com.example.springexample.domain.Company;
 import com.example.springexample.domain.CompanySearchResponse;
 import com.example.springexample.domain.Officer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Arrays;
 
 @Controller
@@ -27,8 +31,11 @@ public class SearchController {
     }
 
     @PostMapping("/")
-    public @ResponseBody CompanySearchResponse search() {
-        TrueProxyAPICompanyResponse trueProxyAPICompanyResponse = searchForTrueProxyAPICompany();
+    public @ResponseBody CompanySearchResponse search(
+            @RequestHeader("x-api-key") String apiKey,
+            @RequestBody CompanySearchRequestBody companySearchRequestBody
+    ) {
+        TrueProxyAPICompanyResponse trueProxyAPICompanyResponse = searchForTrueProxyAPICompany(apiKey, companySearchRequestBody);
 
         return toCompanySearchResponse(trueProxyAPICompanyResponse);
     }
@@ -67,11 +74,20 @@ public class SearchController {
         return new CompanySearchResponse(companies, trueProxyAPICompanyResponse.getTotalResults());
     }
 
-    public TrueProxyAPICompanyResponse searchForTrueProxyAPICompany() {
-        return this.restTemplate.getForObject(
-                truProxyApiUrl + "/Search?Query={searchTerm}",
-                TrueProxyAPICompanyResponse.class,
-                "BBC");
+    public TrueProxyAPICompanyResponse searchForTrueProxyAPICompany(String apiKey, CompanySearchRequestBody companySearchRequestBody) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-api-key", apiKey);
+
+        URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Search")
+                .queryParam("Query", companySearchRequestBody.getCompanyName())
+                .buildAndExpand(companySearchRequestBody.getCompanyName())
+                .toUri();
+
+        return this.restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                TrueProxyAPICompanyResponse.class).getBody();
     }
 
 }
