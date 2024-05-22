@@ -2,8 +2,11 @@ package com.example.springexample;
 
 import com.example.springexample.domain.Address;
 import com.example.springexample.domain.Company;
-import com.example.springexample.domain.CompanySearchResponse;
 import com.example.springexample.domain.Officer;
+import com.example.springexample.json.TestAddress;
+import com.example.springexample.json.TestCompany;
+import com.example.springexample.json.TestCompanySearchResponse;
+import com.example.springexample.json.TestOfficer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,25 +43,25 @@ class TestingWebApplicationTest {
 
 		this.mockMvc.perform(post("/search/")).andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(content().json(objectMapper.writeValueAsString(new CompanySearchResponse(new Company[]{
-						new Company(
+				.andExpect(content().json(objectMapper.writeValueAsString(new TestCompanySearchResponse(new TestCompany[]{
+						new TestCompany(
 								"06500244",
 								"ltd",
 								"BBC LIMITED",
 								"active",
 								"2008-02-11",
-								new Address(
+								new TestAddress(
 										"Retford",
 										"DN22 0AD",
 										"Boswell Cottage Main Street",
 										"North Leverton",
 										"England"),
-								new Officer[]{
-										new Officer(
+								new TestOfficer[]{
+										new TestOfficer(
 												"BOXALL, Sarah Victoria",
 												"secretary",
 												"2008-02-11",
-												new Address(
+												new TestAddress(
 														"5",
 														"London",
 														"Cranford Close",
@@ -68,6 +71,6 @@ class TestingWebApplicationTest {
 										)
 								}
 						),
-				}))));
+				}, 1))));
 	}
 }

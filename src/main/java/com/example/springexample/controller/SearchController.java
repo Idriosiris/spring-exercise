@@ -43,7 +43,7 @@ public class SearchController {
 								)
 						}
 				),
-		});
+		}, 1);
 	}
 
 }
