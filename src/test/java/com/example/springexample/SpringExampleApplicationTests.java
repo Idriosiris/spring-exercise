@@ -20,7 +20,7 @@ class TestingWebApplicationTest {
 	private MockMvc mockMvc;
 
 	@Test
-	void shouldReturnDefaultMessage() throws Exception {
+	void shouldReturnHealthCheckMessage() throws Exception {
 		this.mockMvc.perform(get("/healthcheck/")).andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("Healthy!")));
