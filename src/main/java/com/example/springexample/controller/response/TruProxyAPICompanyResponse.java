@@ -3,6 +3,7 @@ package com.example.springexample.controller.response;
 import com.example.springexample.domain.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TruProxyAPICompanyResponse {
@@ -72,7 +73,7 @@ public class TruProxyAPICompanyResponse {
                                     company.getAddress().getAddressLine1(),
                                     company.getAddress().getCountry()
                             ),
-                            Arrays.stream(officers).map(
+                            Arrays.stream(officers != null ? officers : new TruProxyAPIOfficer[]{}).map(
                                     trueProxyAPIOfficer -> new Officer(
                                             trueProxyAPIOfficer.getName(),
                                             trueProxyAPIOfficer.getOfficerRole(),

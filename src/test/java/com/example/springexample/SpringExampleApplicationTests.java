@@ -347,4 +347,227 @@ class TestingWebApplicationTest {
                         ),
                 }, 20))));
     }
+
+    @Test
+    void noCompaniesShouldBeReturnedWhenTruApiReturnsNoSearchItems() throws Exception {
+        this.truProxyAPIWireMockServer.stubFor(
+                get("/Search?Query=BBC%20LIMITED")
+                        .withHeader("x-api-key", equalTo("test-api-key"))
+                        .willReturn(
+                                aResponse()
+                                        .withHeader("Content-Type", "application/json")
+                                        .withBody(
+                                                """
+                                                        	{
+                                                        	  "page_number": 1,
+                                                        	  "kind": "search#companies",
+                                                        	  "total_results": 0,
+                                                        	  "items": []
+                                                        	}
+                                                        """)
+                        ));
+
+        this.mockMvc.perform(post("/search/").with(
+                        request -> {
+                            request.addHeader("Content-Type", "application/json");
+                            request.addHeader("x-api-key", "test-api-key");
+                            return request;
+                        }
+                ).content(objectMapper.writeValueAsString(new TestCompanySearchRequestBody("BBC LIMITED"))))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(new TestCompanySearchResponse(new TestCompany[]{}, 0))));
+    }
+
+    @Test
+    void whenNoOfficersExistForACompanyReturnAnEmptyOfficersList() throws Exception {
+        this.truProxyAPIWireMockServer.stubFor(
+                get("/Search?Query=BBC%20LIMITED")
+                        .withHeader("x-api-key", equalTo("test-api-key"))
+                        .willReturn(
+                                aResponse()
+                                        .withHeader("Content-Type", "application/json")
+                                        .withBody(
+                                                """
+                                                        	{
+                                                        	  "page_number": 1,
+                                                        	  "kind": "search#companies",
+                                                        	  "total_results": 20,
+                                                        	  "items": [
+                                                        		  {
+                                                        			  "company_status": "active",
+                                                        			  "address_snippet": "Boswell Cottage Main Street, North Leverton, Retford, England, DN22 0AD",
+                                                        			  "date_of_creation": "2008-02-11",
+                                                        			  "matches": {
+                                                        				  "title": [
+                                                        					  1,
+                                                        					  3
+                                                        				  ]
+                                                        			  },
+                                                        			  "description": "06500244 - Incorporated on 11 February 2008",
+                                                        			  "links": {
+                                                        				  "self": "/company/06500244"
+                                                        			  },
+                                                        			  "company_number": "06500244",
+                                                        			  "title": "BBC LIMITED",
+                                                        			  "company_type": "ltd",
+                                                        			  "address": {
+                                                        				  "premises": "Boswell Cottage Main Street",
+                                                        				  "postal_code": "DN22 0AD",
+                                                        				  "country": "England",
+                                                        				  "locality": "Retford",
+                                                        				  "address_line_1": "North Leverton"
+                                                        			  },
+                                                        			  "kind": "searchresults#company",
+                                                        			  "description_identifier": [
+                                                        				  "incorporated-on"
+                                                        			  ]
+                                                        		  }]
+                                                        	}
+                                                        """)
+                        ));
+
+        this.truProxyAPIWireMockServer.stubFor(
+                get("/Officers?CompanyNumber=06500244")
+                        .withHeader("x-api-key", equalTo("test-api-key"))
+                        .willReturn(
+                                aResponse()
+                                        .withHeader("Content-Type", "application/json")
+                                        .withBody(
+                                                """
+                                                        {
+                                                          "etag": "6dd2261e61776d79c2c50685145fac364e75e24e",
+                                                          "links": {
+                                                            "self": "/company/10241297/officers"
+                                                          },
+                                                          "kind": "officer-list",
+                                                          "items_per_page": 35,
+                                                          "items": []
+                                                        }
+                                                        """)
+                        ));
+
+        this.mockMvc.perform(post("/search/").with(
+                        request -> {
+                            request.addHeader("Content-Type", "application/json");
+                            request.addHeader("x-api-key", "test-api-key");
+                            return request;
+                        }
+                ).content(objectMapper.writeValueAsString(new TestCompanySearchRequestBody("BBC LIMITED"))))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(new TestCompanySearchResponse(new TestCompany[]{
+                        new TestCompany(
+                                "06500244",
+                                "ltd",
+                                "BBC LIMITED",
+                                "active",
+                                "2008-02-11",
+                                new TestAddress(
+                                        "Retford",
+                                        "DN22 0AD",
+                                        "Boswell Cottage Main Street",
+                                        "North Leverton",
+                                        "England"),
+                                new TestOfficer[]{
+                                }
+                        ),
+                }, 20))));
+    }
+
+    @Test
+    void whenOfficersItemsArrayIsNullTreatItAsEmpty() throws Exception {
+        this.truProxyAPIWireMockServer.stubFor(
+                get("/Search?Query=BBC%20LIMITED")
+                        .withHeader("x-api-key", equalTo("test-api-key"))
+                        .willReturn(
+                                aResponse()
+                                        .withHeader("Content-Type", "application/json")
+                                        .withBody(
+                                                """
+                                                        	{
+                                                        	  "page_number": 1,
+                                                        	  "kind": "search#companies",
+                                                        	  "total_results": 20,
+                                                        	  "items": [
+                                                        		  {
+                                                        			  "company_status": "active",
+                                                        			  "address_snippet": "Boswell Cottage Main Street, North Leverton, Retford, England, DN22 0AD",
+                                                        			  "date_of_creation": "2008-02-11",
+                                                        			  "matches": {
+                                                        				  "title": [
+                                                        					  1,
+                                                        					  3
+                                                        				  ]
+                                                        			  },
+                                                        			  "description": "06500244 - Incorporated on 11 February 2008",
+                                                        			  "links": {
+                                                        				  "self": "/company/06500244"
+                                                        			  },
+                                                        			  "company_number": "06500244",
+                                                        			  "title": "BBC LIMITED",
+                                                        			  "company_type": "ltd",
+                                                        			  "address": {
+                                                        				  "premises": "Boswell Cottage Main Street",
+                                                        				  "postal_code": "DN22 0AD",
+                                                        				  "country": "England",
+                                                        				  "locality": "Retford",
+                                                        				  "address_line_1": "North Leverton"
+                                                        			  },
+                                                        			  "kind": "searchresults#company",
+                                                        			  "description_identifier": [
+                                                        				  "incorporated-on"
+                                                        			  ]
+                                                        		  }]
+                                                        	}
+                                                        """)
+                        ));
+
+        this.truProxyAPIWireMockServer.stubFor(
+                get("/Officers?CompanyNumber=06500244")
+                        .withHeader("x-api-key", equalTo("test-api-key"))
+                        .willReturn(
+                                aResponse()
+                                        .withHeader("Content-Type", "application/json")
+                                        .withBody(
+                                                """
+                                                        {
+                                                          "etag": "6dd2261e61776d79c2c50685145fac364e75e24e",
+                                                          "links": {
+                                                            "self": "/company/10241297/officers"
+                                                          },
+                                                          "kind": "officer-list",
+                                                          "items_per_page": 35,
+                                                          "items": []
+                                                        }
+                                                        """)
+                        ));
+
+        this.mockMvc.perform(post("/search/").with(
+                        request -> {
+                            request.addHeader("Content-Type", "application/json");
+                            request.addHeader("x-api-key", "test-api-key");
+                            return request;
+                        }
+                ).content(objectMapper.writeValueAsString(new TestCompanySearchRequestBody("BBC LIMITED"))))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(new TestCompanySearchResponse(new TestCompany[]{
+                        new TestCompany(
+                                "06500244",
+                                "ltd",
+                                "BBC LIMITED",
+                                "active",
+                                "2008-02-11",
+                                new TestAddress(
+                                        "Retford",
+                                        "DN22 0AD",
+                                        "Boswell Cottage Main Street",
+                                        "North Leverton",
+                                        "England"),
+                                new TestOfficer[]{
+                                }
+                        ),
+                }, 20))));
+    }
 }
