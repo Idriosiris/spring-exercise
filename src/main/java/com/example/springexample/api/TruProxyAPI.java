@@ -1,6 +1,5 @@
 package com.example.springexample.api;
 
-import com.example.springexample.controller.request.CompanySearchRequestBody;
 import com.example.springexample.controller.response.TruProxyAPICompanyResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -22,13 +21,13 @@ public class TruProxyAPI {
         this.truProxyApiUrl = truProxyApiUrl;
     }
 
-    public TruProxyAPICompanyResponse searchForTruProxyAPICompany(String apiKey, CompanySearchRequestBody companySearchRequestBody) {
+    public TruProxyAPICompanyResponse searchForTruProxyAPICompany(String apiKey, String searchQuery) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-api-key", apiKey);
 
         URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Search")
-                .queryParam("Query", companySearchRequestBody.getCompanyName())
-                .buildAndExpand(companySearchRequestBody.getCompanyName())
+                .queryParam("Query", searchQuery)
+                .buildAndExpand(searchQuery)
                 .toUri();
 
         return restTemplate.exchange(

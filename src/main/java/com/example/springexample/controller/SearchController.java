@@ -26,9 +26,21 @@ public class SearchController {
            @RequestHeader("x-api-key") String apiKey,
            @RequestBody CompanySearchRequestBody companySearchRequestBody
     ) {
-        TruProxyAPICompanyResponse truProxyAPICompanyResponse = truProxyAPI.searchForTruProxyAPICompany(apiKey, companySearchRequestBody);
+        TruProxyAPICompanyResponse truProxyAPICompanyResponse = truProxyAPI.searchForTruProxyAPICompany(apiKey, getSearchQuery(companySearchRequestBody, companySearchRequestBody));
 
         return toCompanySearchResponse(truProxyAPICompanyResponse);
+    }
+
+    private static String getSearchQuery(CompanySearchRequestBody companySearchRequestBody, CompanySearchRequestBody searchRequestBody) {
+        if (companySearchRequestBody.getCompanyNumber() != null && companySearchRequestBody.getCompanyNumber() != null) {
+            return companySearchRequestBody.getCompanyNumber();
+        }
+
+        if (companySearchRequestBody.getCompanyName() != null && companySearchRequestBody.getCompanyNumber() == null) {
+            return companySearchRequestBody.getCompanyName();
+        }
+
+        return companySearchRequestBody.getCompanyNumber();
     }
 
 }

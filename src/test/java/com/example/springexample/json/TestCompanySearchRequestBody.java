@@ -11,6 +11,10 @@ public class TestCompanySearchRequestBody {
         this.companyNumber = companyNumber;
     }
 
+    public TestCompanySearchRequestBody(String companyName) {
+        this.companyName = companyName;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
