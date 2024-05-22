@@ -1,16 +1,11 @@
 # TODO
-1. Add an extra service for the logic putting together the companies and Officers
-2. Make sure the timeout to downstream services is sensible 
+1. Double-check existing functional requirements
+2. Cleanup directories, naming and grouping of classes
 3. Set jackson mapper camelcase to underscore on our resource 
 4. Set mapper of incoming json to DTO 
 5. Use transformers between different layers 
 6. Add more unit tests 
-7. Use 2 spaces tabs across project 
-8. Cleanup directories, naming and grouping of classes 
-9. Fix all typos True -> Tru 
-10. Seems like there is an instance where the officers items array comes as null from the api
-    1. For now, I am treating it as an empty array so my code works, and it's easier to demo 
-11. Write readme on how to go through the code and changes 
+7. Write readme on how to go through the code and changes 
 
 # Done
 1. Initialize app with spring initializer
@@ -28,4 +23,10 @@
 10. Add logic that dictates how the company name and number are used
 11. Add test for pulling in the response the Officer information 
 12. Add test for edge cases such as empty response list from the 3rd party api and/or 404, 400, 500 etc 
-    13. What happens when officers array is null? 
+    1. What happens when officers array is null? 
+13. Add an extra service for the logic putting together the companies and Officers
+14. Double-checked the default, it's 10s 
+15. Fix all typos True -> Tru
+16. Seems like there is an instance where the officers items array comes as null from the api
+    1. For now, I am treating it as an empty array so my code works, and it's easier to demo
+17. Use 2 spaces tabs across project 

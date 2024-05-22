@@ -1,18 +1,14 @@
-package com.example.springexample.json;
+package com.example.springexample.controller.request;
 
 import java.util.Objects;
 
-public class TestCompanySearchRequestBody {
+public class CompaniesSearchRequestBody {
   private String companyName;
   private String companyNumber;
 
-  public TestCompanySearchRequestBody(String companyName, String companyNumber) {
+  public CompaniesSearchRequestBody(String companyName, String companyNumber) {
     this.companyName = companyName;
     this.companyNumber = companyNumber;
-  }
-
-  public TestCompanySearchRequestBody(String companyName) {
-    this.companyName = companyName;
   }
 
   public String getCompanyName() {
@@ -35,7 +31,7 @@ public class TestCompanySearchRequestBody {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    TestCompanySearchRequestBody that = (TestCompanySearchRequestBody) o;
+    CompaniesSearchRequestBody that = (CompaniesSearchRequestBody) o;
     return Objects.equals(companyName, that.companyName) && Objects.equals(companyNumber, that.companyNumber);
   }
 

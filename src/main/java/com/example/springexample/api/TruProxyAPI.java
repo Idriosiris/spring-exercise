@@ -14,43 +14,43 @@ import java.net.URI;
 
 @Service
 public class TruProxyAPI {
-    private final RestTemplate restTemplate;
-    private final String truProxyApiUrl;
+  private final RestTemplate restTemplate;
+  private final String truProxyApiUrl;
 
-    public TruProxyAPI(RestTemplate restTemplate, @Value("${tru-proxy-api.url}") String truProxyApiUrl) {
-        this.restTemplate = restTemplate;
-        this.truProxyApiUrl = truProxyApiUrl;
-    }
+  public TruProxyAPI(RestTemplate restTemplate, @Value("${tru-proxy-api.url}") String truProxyApiUrl) {
+    this.restTemplate = restTemplate;
+    this.truProxyApiUrl = truProxyApiUrl;
+  }
 
-    public TruProxyAPICompanyResponse searchForTruProxyAPICompany(String apiKey, String searchQuery) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("x-api-key", apiKey);
+  public TruProxyAPICompanyResponse searchCompanies(String apiKey, String query) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("x-api-key", apiKey);
 
-        URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Search")
-                .queryParam("Query", searchQuery)
-                .buildAndExpand(searchQuery)
-                .toUri();
+    URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Search")
+            .queryParam("Query", query)
+            .buildAndExpand(query)
+            .toUri();
 
-        return restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                new HttpEntity<>(headers),
-                TruProxyAPICompanyResponse.class).getBody();
-    }
+    return restTemplate.exchange(
+            uri,
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            TruProxyAPICompanyResponse.class).getBody();
+  }
 
-    public TruProxyAPIOfficersResponse getTruProxyAPIOfficers(String apiKey, String companyNumber) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("x-api-key", apiKey);
+  public TruProxyAPIOfficersResponse getOfficers(String apiKey, String companyNumber) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("x-api-key", apiKey);
 
-        URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Officers")
-                .queryParam("CompanyNumber", companyNumber)
-                .buildAndExpand(companyNumber)
-                .toUri();
+    URI uri = UriComponentsBuilder.fromUriString(truProxyApiUrl + "/Officers")
+            .queryParam("CompanyNumber", companyNumber)
+            .buildAndExpand(companyNumber)
+            .toUri();
 
-        return restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                new HttpEntity<>(headers),
-                TruProxyAPIOfficersResponse.class).getBody();
-    }
+    return restTemplate.exchange(
+            uri,
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            TruProxyAPIOfficersResponse.class).getBody();
+  }
 }

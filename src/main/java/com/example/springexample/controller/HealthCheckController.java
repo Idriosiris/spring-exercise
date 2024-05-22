@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/healthcheck")
 public class HealthCheckController {
 
-	@GetMapping("/")
-	public @ResponseBody String greeting() {
-		return "Healthy!";
-	}
+  @GetMapping("/")
+  public @ResponseBody String greeting() {
+    return "Healthy!";
+  }
 }

@@ -1,30 +1,30 @@
 package com.example.springexample.domain;
 
+import com.example.springexample.controller.response.TruProxyAPICompany;
 import com.example.springexample.controller.response.TruProxyAPIOfficer;
-import com.example.springexample.controller.response.TrueProxyAPICompany;
 
 public class TruProxyAPICompanyOfficersPair {
-    private TrueProxyAPICompany company;
-    private TruProxyAPIOfficer[] officers;
+  private TruProxyAPICompany company;
+  private TruProxyAPIOfficer[] officers;
 
-    public TruProxyAPICompanyOfficersPair(TrueProxyAPICompany trueProxyAPICompany, TruProxyAPIOfficer[] officers) {
-        this.company = trueProxyAPICompany;
-        this.officers = officers;
-    }
+  public TruProxyAPICompanyOfficersPair(TruProxyAPICompany truProxyAPICompany, TruProxyAPIOfficer[] officers) {
+    this.company = truProxyAPICompany;
+    this.officers = officers;
+  }
 
-    public TrueProxyAPICompany getCompany() {
-        return company;
-    }
+  public TruProxyAPICompany getCompany() {
+    return company;
+  }
 
-    public void setCompany(TrueProxyAPICompany company) {
-        this.company = company;
-    }
+  public void setCompany(TruProxyAPICompany company) {
+    this.company = company;
+  }
 
-    public TruProxyAPIOfficer[] getOfficers() {
-        return officers;
-    }
+  public TruProxyAPIOfficer[] getOfficers() {
+    return officers;
+  }
 
-    public void setOfficers(TruProxyAPIOfficer[] officers) {
-        this.officers = officers;
-    }
+  public void setOfficers(TruProxyAPIOfficer[] officers) {
+    this.officers = officers;
+  }
 }
