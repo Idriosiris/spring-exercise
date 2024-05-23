@@ -1,11 +1,20 @@
 package com.example.companylookup.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class TestOfficer {
+  @JsonProperty("name")
   private String name;
+
+  @JsonProperty("officer_role")
   private String officerRole;
+
+  @JsonProperty("appointed_on")
   private String appointedOn;
+
+  @JsonProperty("address")
   private TestAddress address;
 
   public TestOfficer(String name, String officerRole, String appointedOn, TestAddress address) {

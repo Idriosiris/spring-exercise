@@ -1,11 +1,20 @@
 package com.example.companylookup.lookup.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class Officer {
+  @JsonProperty("name")
   private String name;
+
+  @JsonProperty("officer_role")
   private String officerRole;
+
+  @JsonProperty("appointed_on")
   private String appointedOn;
+
+  @JsonProperty("address")
   private Address address;
 
   public Officer(String name, String officerRole, String appointedOn, Address address) {

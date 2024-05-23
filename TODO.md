@@ -1,9 +1,8 @@
 # TODO
-1. Set jackson mapper camelcase to underscore on our resource 
-2. Use transformers between different layers 
-3. Add more unit tests 
-4. Write readme on how to go through the code and changes 
-5. Any other way to improve the tests? 
+1. Use transformers between different layers 
+2. Add more unit tests 
+3. Write readme on how to go through the code and changes 
+4. Any other way to improve the tests? 
    1. Builder for the JSON wiremock stubs
    2. Extract factory methods for the assert part of the tests
    3. Use custom hamcrest matchers 
@@ -32,4 +31,5 @@
     1. For now, I am treating it as an empty array so my code works, and it's easier to demo
 17. Use 2 spaces tabs across project 
 18. Double-check existing functional requirements
-19. Cleanup directories, naming and grouping of classes 
+19. Cleanup directories, naming and grouping of classes
+20. Set jackson mapper camelcase to underscore on our resource 

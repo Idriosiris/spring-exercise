@@ -1,10 +1,15 @@
 package com.example.companylookup.lookup.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class PostCompanySearchResponse {
+  @JsonProperty("items")
   private Company[] items;
+
+  @JsonProperty("total_results")
   private int totalResults;
 
   public PostCompanySearchResponse(Company[] companies, int totalResults) {

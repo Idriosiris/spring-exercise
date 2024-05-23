@@ -1,15 +1,30 @@
 package com.example.companylookup.lookup.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Company {
+  @JsonProperty("company_number")
   private String companyNumber;
+
+  @JsonProperty("company_type")
   private String companyType;
+
+  @JsonProperty("title")
   private String title;
+
+  @JsonProperty("company_status")
   private String companyStatus;
+
+  @JsonProperty("date_of_creation")
   private String dateOfCreation;
+
+  @JsonProperty("address")
   private Address address;
+
+  @JsonProperty("officers")
   private Officer[] officers;
 
   public Company(String companyNumber, String companyType, String title, String companyStatus, String dateOfCreation, Address address, Officer[] officers) {

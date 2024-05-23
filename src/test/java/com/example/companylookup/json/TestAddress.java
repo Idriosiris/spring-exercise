@@ -1,19 +1,30 @@
 package com.example.companylookup.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class TestAddress {
+  @JsonProperty("locality")
   private String locality;
-  private String postCode;
+
+  @JsonProperty("postal_code")
+  private String postalCode;
+
+  @JsonProperty("premises")
   private String premises;
-  private String addressLine;
+
+  @JsonProperty("address_line_1")
+  private String addressLine1;
+
+  @JsonProperty("country")
   private String country;
 
   public TestAddress(String locality, String postCode, String premises, String addressLine, String country) {
     this.locality = locality;
-    this.postCode = postCode;
+    this.postalCode = postCode;
     this.premises = premises;
-    this.addressLine = addressLine;
+    this.addressLine1 = addressLine;
     this.country = country;
   }
 
@@ -25,12 +36,12 @@ public class TestAddress {
     this.locality = locality;
   }
 
-  public String getPostCode() {
-    return postCode;
+  public String getPostalCode() {
+    return postalCode;
   }
 
-  public void setPostCode(String postCode) {
-    this.postCode = postCode;
+  public void setPostalCode(String postalCode) {
+    this.postalCode = postalCode;
   }
 
   public String getPremises() {
@@ -41,12 +52,12 @@ public class TestAddress {
     this.premises = premises;
   }
 
-  public String getAddressLine() {
-    return addressLine;
+  public String getAddressLine1() {
+    return addressLine1;
   }
 
-  public void setAddressLine(String addressLine) {
-    this.addressLine = addressLine;
+  public void setAddressLine1(String addressLine1) {
+    this.addressLine1 = addressLine1;
   }
 
   public String getCountry() {
@@ -62,11 +73,11 @@ public class TestAddress {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     TestAddress address = (TestAddress) o;
-    return Objects.equals(locality, address.locality) && Objects.equals(postCode, address.postCode) && Objects.equals(premises, address.premises) && Objects.equals(addressLine, address.addressLine) && Objects.equals(country, address.country);
+    return Objects.equals(locality, address.locality) && Objects.equals(postalCode, address.postalCode) && Objects.equals(premises, address.premises) && Objects.equals(addressLine1, address.addressLine1) && Objects.equals(country, address.country);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(locality, postCode, premises, addressLine, country);
+    return Objects.hash(locality, postalCode, premises, addressLine1, country);
   }
 }
