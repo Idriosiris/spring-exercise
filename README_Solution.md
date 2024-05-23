@@ -11,16 +11,15 @@
   - `SELECT * FROM COMPANY_SEARCH_ENTITY` and you can see the cached response being populated
   
 # TODO
-1. Use transformers between different layers 
-2. Add more unit tests 
-3. Write readme on how to go through the code and changes 
-4. Any other way to improve the tests? 
-   1. Builder for the JSON wiremock stubs
-   2. Extract factory methods for the assert part of the tests
-   3. Use custom hamcrest matchers 
-5. Exception handling could be improved 
-6. Logging could be improved 
-7. Better documentation of resource for swagger
+1. Any other way to improve the tests?
+   1. Extract factory methods for the assert part of the tests
+   2. Builder for the JSON wiremock stubs
+   3. Use custom hamcrest matchers
+2. Use transformers between different layers 
+3. Add more unit tests  
+4. Exception handling could be improved 
+5. Logging could be improved 
+6. Better documentation of resource for swagger
 
 # Done
 1. Initialize app with spring initializer
@@ -58,3 +57,4 @@
     7. The use case though seems more like something that would benefit from an in-memory cache like guava, memcached etc or even a distributed cache like Redis 
 22. Setup H2 database and cache response when called via company number 
 23. Storage can also be persistent via file storage
+24. Write readme on how to go through the code and changes 
