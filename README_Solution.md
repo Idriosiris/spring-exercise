@@ -24,17 +24,18 @@ cache in action
 ```
 
 # TODO
-1. Any other way to improve the tests?
+1. Adding integration tests for the database as we don't do anything with that yet
+2. Any other way to improve the tests?
    1. Builder for the JSON wiremock stubs 
-   2. Use custom hamcrest matchers
-2. Use transformer annotations between different layers and not plain methods
-   1. Although debatable as they sometimes become more convoluted
-3. Add more unit tests 
+   2. Use custom hamcrest matchers 
+3. Use transformer annotations between different layers and not plain methods
+   1. Although debatable as they sometimes become more convoluted 
+4. Add more unit tests 
    1. At the moment the testing pyramid is turned and the units we test are very big 
-   2. Surely certain aspects of the smaller classes can be tested individually
-4. Exception handling could be improved 
-5. Logging could be improved 
-6. Better documentation of resource for swagger
+   2. Surely certain aspects of the smaller classes can be tested individually 
+5. Exception handling could be improved 
+6. Logging could be improved 
+7. Better documentation of resource for swagger
 
 # Done
 1. Initialize app with spring initializer
