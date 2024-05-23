@@ -1,8 +1,9 @@
 # TODO
-1. Use transformers between different layers 
-2. Add more unit tests 
-3. Write readme on how to go through the code and changes 
-4. Any other way to improve the tests? 
+1. What database should I use for the bonus part of the project?
+2. Use transformers between different layers 
+3. Add more unit tests 
+4. Write readme on how to go through the code and changes 
+5. Any other way to improve the tests? 
    1. Builder for the JSON wiremock stubs
    2. Extract factory methods for the assert part of the tests
    3. Use custom hamcrest matchers 

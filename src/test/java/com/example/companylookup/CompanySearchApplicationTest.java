@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @EnableWireMock({@ConfigureWireMock(name = "tru-proxy-API", port = 5364)})
-class CompanyLookupApplicationTest {
+class CompanySearchApplicationTest {
   @Autowired
   private MockMvc mockMvc;
 
