@@ -1,11 +1,14 @@
 # TODO
-1. Make tests more readable
-2. Cleanup directories, naming and grouping of classes
+1. Cleanup directories, naming and grouping of classes 
 2. Set jackson mapper camelcase to underscore on our resource 
 3. Set mapper of incoming json to DTO 
 4. Use transformers between different layers 
 5. Add more unit tests 
-6. Write readme on how to go through the code and changes 
+6. Write readme on how to go through the code and changes
+7. Any other way to improve the tests? 
+   1. Builder for the JSON wiremock stubs
+   2. Extract factory methods for the assert part of the tests
+   3. Use custom hamcrest matchers 
 
 # Done
 1. Initialize app with spring initializer
