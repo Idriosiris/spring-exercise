@@ -9,6 +9,7 @@
   
 - If you click the table COMPANY_SEARCH_ENTITY it should automatically build a query as 
   - `SELECT * FROM COMPANY_SEARCH_ENTITY` and you can see the cached response being populated
+  
 # TODO
 1. Use transformers between different layers 
 2. Add more unit tests 
