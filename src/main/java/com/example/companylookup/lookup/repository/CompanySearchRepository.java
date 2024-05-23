@@ -11,4 +11,6 @@ public interface CompanySearchRepository extends CrudRepository<CompanySearchEnt
   Optional<CompanySearchEntity> findById(String id);
 
   <S extends CompanySearchEntity> S save(S entity);
+
+  void deleteAll();
 }

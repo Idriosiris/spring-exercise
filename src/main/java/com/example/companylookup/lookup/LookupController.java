@@ -1,13 +1,12 @@
 package com.example.companylookup.lookup;
 
-import com.example.companylookup.lookup.api.dto.TruProxyAPICompanyResponse;
 import com.example.companylookup.lookup.dto.request.PostCompaniesSearchRequest;
+import com.example.companylookup.lookup.dto.response.PostCompanySearchResponse;
 import com.example.companylookup.lookup.repository.CompanySearchRepository;
 import com.example.companylookup.lookup.repository.RepositoryManager;
 import com.example.companylookup.lookup.repository.entity.CompanySearchEntity;
-import com.example.companylookup.lookup.service.dto.TruProxyAPICompanyOfficersPairs;
-import com.example.companylookup.lookup.dto.response.PostCompanySearchResponse;
 import com.example.companylookup.lookup.service.TruProxyService;
+import com.example.companylookup.lookup.service.dto.TruProxyAPICompanyOfficersPairs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import static com.example.companylookup.lookup.service.dto.TruProxyAPICompanyOff
 @Controller
 @RequestMapping("search")
 public class LookupController {
-  private ObjectMapper objectMapper;
+  private final ObjectMapper objectMapper;
 
   private final TruProxyService truProxyService;
   private final CompanySearchRepository companySearchRepository;
@@ -51,7 +50,9 @@ public class LookupController {
 
     PostCompanySearchResponse response = toCompanySearchResponse(truProxyAPICompanyOfficersPairs);
 
-    repositoryManager.saveCompanySearch(companySearchRequestBody.getCompanyNumber(), response);
+    if (companySearchRequestBody.getCompanyNumber() != null) {
+      repositoryManager.saveCompanySearch(companySearchRequestBody.getCompanyNumber(), response);
+    }
 
     return response;
   }
