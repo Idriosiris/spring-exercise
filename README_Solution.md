@@ -1,3 +1,14 @@
+# Notes on testing it out
+- For automated tests the main suite is in `src/test/java/com/example/companylookup/CompanySearchApplicationTest.java`
+- For manual testing run the app and go to `http://localhost:8080/swagger-ui.html`
+- First time you call the search endpoint it will take a while to respond because it's caching the response
+- To see the response being cached go to `http://localhost:8080/h2-console` and use the following settings:
+  - JDBC URL: `jdbc:h2:mem:testdb`
+  - User Name: `sa`
+  - Password: `password`
+  
+- If you click the table COMPANY_SEARCH_ENTITY it should automatically build a query as 
+  - `SELECT * FROM COMPANY_SEARCH_ENTITY` and you can see the cached response being populated
 # TODO
 1. Use transformers between different layers 
 2. Add more unit tests 

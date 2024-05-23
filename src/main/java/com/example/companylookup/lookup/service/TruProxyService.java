@@ -1,6 +1,7 @@
 package com.example.companylookup.lookup.service;
 
 import com.example.companylookup.lookup.api.TruProxyAPI;
+import com.example.companylookup.lookup.api.dto.TruProxyAPICompany;
 import com.example.companylookup.lookup.api.dto.TruProxyAPICompanyResponse;
 import com.example.companylookup.lookup.api.dto.TruProxyAPIOfficer;
 import com.example.companylookup.lookup.api.dto.TruProxyAPIOfficersResponse;
@@ -23,7 +24,9 @@ public class TruProxyService {
   public TruProxyAPICompanyOfficersPairs searchCompaniesAndOfficers(String apiKey, String query, String activeOnly) throws JsonProcessingException {
     TruProxyAPICompanyResponse truProxyAPICompanyResponse = truProxyAPI.searchCompanies(apiKey, query);
 
-    TruProxyAPICompanyOfficersPair[] truProxyAPICompanyOfficersPairs = Arrays.stream(truProxyAPICompanyResponse.getItems())
+    TruProxyAPICompany[] companies = truProxyAPICompanyResponse.getItems();
+
+    TruProxyAPICompanyOfficersPair[] truProxyAPICompanyOfficersPairs = Arrays.stream(companies != null ? companies : new TruProxyAPICompany[]{})
             .filter(truProxyAPICompany -> !activeOnly.equals("true") || truProxyAPICompany.getCompanyStatus().equals("active"))
             .map(
                     truProxyAPICompany -> {
