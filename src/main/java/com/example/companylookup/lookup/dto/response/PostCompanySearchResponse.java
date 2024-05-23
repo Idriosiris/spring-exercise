@@ -2,10 +2,11 @@ package com.example.companylookup.lookup.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class PostCompanySearchResponse {
+public class PostCompanySearchResponse implements Serializable {
   @JsonProperty("items")
   private Company[] items;
 

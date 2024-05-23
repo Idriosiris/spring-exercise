@@ -15,16 +15,8 @@ public class PostCompaniesSearchRequest {
     return companyName;
   }
 
-  public void setCompanyName(String companyName) {
-    this.companyName = companyName;
-  }
-
   public String getCompanyNumber() {
     return companyNumber;
-  }
-
-  public void setCompanyNumber(String companyNumber) {
-    this.companyNumber = companyNumber;
   }
 
   @Override

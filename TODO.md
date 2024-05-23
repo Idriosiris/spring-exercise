@@ -1,12 +1,14 @@
 # TODO
-1. What database should I use for the bonus part of the project?
-2. Use transformers between different layers 
-3. Add more unit tests 
-4. Write readme on how to go through the code and changes 
-5. Any other way to improve the tests? 
+1. Use transformers between different layers 
+2. Add more unit tests 
+3. Write readme on how to go through the code and changes 
+4. Any other way to improve the tests? 
    1. Builder for the JSON wiremock stubs
    2. Extract factory methods for the assert part of the tests
    3. Use custom hamcrest matchers 
+5. Exception handling could be improved 
+6. Logging could be improved 
+7. Better documentation of resource for swagger
 
 # Done
 1. Initialize app with spring initializer
@@ -34,3 +36,13 @@
 18. Double-check existing functional requirements
 19. Cleanup directories, naming and grouping of classes
 20. Set jackson mapper camelcase to underscore on our resource 
+21. What database should I use for the bonus part of the project? 
+    1. The readme seems to suggest we need to use a database 
+    2. If we need a database I'd go with something in-memory like H2 
+    3. Not SQLite because H2 is more compatible with springboot so for this exercise I've got best chances to not encounter problems 
+    4. This can also help me show how Hibernate works 
+    5. And help me emulate other things like PostgreSQL while being embedded 
+    6. It's also embedded in the app so minimal setup is needed to run it and play around the H2 ui to see how data is actually populated, helps with demoing 
+    7. The use case though seems more like something that would benefit from an in-memory cache like guava, memcached etc or even a distributed cache like Redis 
+22. Setup H2 database and cache response when called via company number 
+23. Storage can also be persistent via file storage

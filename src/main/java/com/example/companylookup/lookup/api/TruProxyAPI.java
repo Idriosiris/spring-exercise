@@ -17,7 +17,9 @@ public class TruProxyAPI {
   private final RestTemplate restTemplate;
   private final String truProxyApiUrl;
 
-  public TruProxyAPI(RestTemplate restTemplate, @Value("${tru-proxy-api.url}") String truProxyApiUrl) {
+  public TruProxyAPI(
+          RestTemplate restTemplate,
+          @Value("${tru-proxy-api.url}") String truProxyApiUrl) {
     this.restTemplate = restTemplate;
     this.truProxyApiUrl = truProxyApiUrl;
   }
