@@ -3,8 +3,8 @@ package com.example.companylookup.lookup.dto.request;
 import java.util.Objects;
 
 public class PostCompaniesSearchRequest {
-  private String companyName;
-  private String companyNumber;
+  private final String companyName;
+  private final String companyNumber;
 
   public PostCompaniesSearchRequest(String companyName, String companyNumber) {
     this.companyName = companyName;
