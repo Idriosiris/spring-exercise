@@ -6,17 +6,32 @@
   - JDBC URL: `jdbc:h2:mem:testdb`
   - User Name: `sa`
   - Password: `password`
+- The database can also persist between application runs 
+  - What you need to do is to change the `spring.datasource.url` property in `application.properties` to the value 
+    in the comment
   
 - If you click the table COMPANY_SEARCH_ENTITY it should automatically build a query as 
   - `SELECT * FROM COMPANY_SEARCH_ENTITY` and you can see the cached response being populated
-  
+- Feel free to roll back to any previous commit and see how the code looked throughout the exercise
+  - Tests should be passing at any commit going back to the first one -- at least in theory :) 
+
+Following company number is a good one to test with as it returns a consistent batch of companies so you can see the 
+cache in action
+```json
+{
+  "companyNumber": "1390"
+}
+```
+
 # TODO
 1. Any other way to improve the tests?
-   1. Extract factory methods for the assert part of the tests
-   2. Builder for the JSON wiremock stubs
-   3. Use custom hamcrest matchers
-2. Use transformers between different layers 
-3. Add more unit tests  
+   1. Builder for the JSON wiremock stubs 
+   2. Use custom hamcrest matchers
+2. Use transformer annotations between different layers and not plain methods
+   1. Although debatable as they sometimes become more convoluted
+3. Add more unit tests 
+   1. At the moment the testing pyramid is turned and the units we test are very big 
+   2. Surely certain aspects of the smaller classes can be tested individually
 4. Exception handling could be improved 
 5. Logging could be improved 
 6. Better documentation of resource for swagger
@@ -58,3 +73,4 @@
 22. Setup H2 database and cache response when called via company number 
 23. Storage can also be persistent via file storage
 24. Write readme on how to go through the code and changes 
+25. Extract factory methods for the assert part of the tests
