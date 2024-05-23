@@ -15,7 +15,7 @@ public class TruProxyAPIOfficer {
   private String appointedOn;
 
   @JsonProperty("resigned_on")
-  private String resigned_on;
+  private String resignedOn;
 
   @JsonProperty("officer_role")
   private String officerRole;
@@ -59,12 +59,12 @@ public class TruProxyAPIOfficer {
     this.appointedOn = appointedOn;
   }
 
-  public String getResigned_on() {
-    return resigned_on;
+  public String getResignedOn() {
+    return resignedOn;
   }
 
-  public void setResigned_on(String resigned_on) {
-    this.resigned_on = resigned_on;
+  public void setResignedOn(String resignedOn) {
+    this.resignedOn = resignedOn;
   }
 
   public String getOfficerRole() {
@@ -120,11 +120,11 @@ public class TruProxyAPIOfficer {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     TruProxyAPIOfficer that = (TruProxyAPIOfficer) o;
-    return Objects.equals(address, that.address) && Objects.equals(name, that.name) && Objects.equals(appointedOn, that.appointedOn) && Objects.equals(resigned_on, that.resigned_on) && Objects.equals(officerRole, that.officerRole) && Objects.equals(links, that.links) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(occupation, that.occupation) && Objects.equals(countryOfResidence, that.countryOfResidence) && Objects.equals(nationality, that.nationality);
+    return Objects.equals(address, that.address) && Objects.equals(name, that.name) && Objects.equals(appointedOn, that.appointedOn) && Objects.equals(resignedOn, that.resignedOn) && Objects.equals(officerRole, that.officerRole) && Objects.equals(links, that.links) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(occupation, that.occupation) && Objects.equals(countryOfResidence, that.countryOfResidence) && Objects.equals(nationality, that.nationality);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(address, name, appointedOn, resigned_on, officerRole, links, dateOfBirth, occupation, countryOfResidence, nationality);
+    return Objects.hash(address, name, appointedOn, resignedOn, officerRole, links, dateOfBirth, occupation, countryOfResidence, nationality);
   }
 }

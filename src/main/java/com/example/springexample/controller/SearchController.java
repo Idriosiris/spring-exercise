@@ -19,12 +19,14 @@ public class SearchController {
     this.truProxyService = truProxyService;
   }
 
-  @PostMapping("/")
+  @PostMapping("")
   public @ResponseBody CompanySearchResponse search(
+          @RequestParam(value = "activeOnly", required = false, defaultValue = "false") String activeOnly,
           @RequestHeader("x-api-key") String apiKey,
           @RequestBody CompaniesSearchRequestBody companySearchRequestBody
   ) {
-    TruProxyAPICompanyOfficersPairs truProxyAPICompanyOfficersPairs = truProxyService.searchCompaniesAndOfficers(apiKey, query(companySearchRequestBody));
+    TruProxyAPICompanyOfficersPairs truProxyAPICompanyOfficersPairs =
+            truProxyService.searchCompaniesAndOfficers(apiKey, query(companySearchRequestBody), activeOnly);
 
     return toCompanySearchResponse(truProxyAPICompanyOfficersPairs);
   }

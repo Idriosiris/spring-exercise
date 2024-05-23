@@ -1,11 +1,11 @@
 # TODO
-1. Double-check existing functional requirements
+1. Make tests more readable
 2. Cleanup directories, naming and grouping of classes
-3. Set jackson mapper camelcase to underscore on our resource 
-4. Set mapper of incoming json to DTO 
-5. Use transformers between different layers 
-6. Add more unit tests 
-7. Write readme on how to go through the code and changes 
+2. Set jackson mapper camelcase to underscore on our resource 
+3. Set mapper of incoming json to DTO 
+4. Use transformers between different layers 
+5. Add more unit tests 
+6. Write readme on how to go through the code and changes 
 
 # Done
 1. Initialize app with spring initializer
@@ -30,3 +30,4 @@
 16. Seems like there is an instance where the officers items array comes as null from the api
     1. For now, I am treating it as an empty array so my code works, and it's easier to demo
 17. Use 2 spaces tabs across project 
+18. Double-check existing functional requirements
