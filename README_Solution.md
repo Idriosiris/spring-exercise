@@ -1,4 +1,5 @@
 # Notes on testing it out
+- Project is using Java 18 and springboot 3.2.5 and was run using Intellij IDEA
 - For automated tests the main suite is in `src/test/java/com/example/companylookup/CompanySearchApplicationTest.java`
 - For manual testing run the app and go to `http://localhost:8080/swagger-ui.html`
 - First time you call the search endpoint it will take a while to respond because it's caching the response
@@ -9,9 +10,9 @@
 - The database can also persist between application runs 
   - What you need to do is to change the `spring.datasource.url` property in `application.properties` to the value 
     in the comment
-  
 - If you click the table COMPANY_SEARCH_ENTITY it should automatically build a query as 
   - `SELECT * FROM COMPANY_SEARCH_ENTITY` and you can see the cached response being populated
+
 - Feel free to roll back to any previous commit and see how the code looked throughout the exercise
   - Tests should be passing at any commit going back to the first one -- at least in theory :) 
 
